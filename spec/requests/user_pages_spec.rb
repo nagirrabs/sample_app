@@ -17,7 +17,7 @@ describe "User pages" do
 
   it { should have_selector('h1',    text: user.name) }
   it { should have_selector('title', text: user.name) }
- end
+  end
 
 describe "signup" do
 
@@ -63,7 +63,10 @@ describe "signup" do
 
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
 
     describe "page" do
       it { should have_selector('h1',    text: "Update your profile") }
